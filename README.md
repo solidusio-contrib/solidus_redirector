@@ -11,14 +11,14 @@ Installation
 Add solidus_redirector to your Gemfile:
 
 ```ruby
-gem 'solidus_redirector'
+gem 'solidus_redirector', github: 'solidusio-contrib/solidus_redirector'
 ```
 
 Bundle your dependencies and run the installation generator:
 
 ```shell
 bundle
-bundle exec rails g solidus_redirector:install
+bin/rails g solidus_redirector:install
 ```
 
 Testing

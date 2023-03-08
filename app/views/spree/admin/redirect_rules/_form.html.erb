@@ -1,14 +1,14 @@
-<div class="field">
-  <%= f.check_box :active %>
-  <%= f.label :active, 'active' %>
-</div>
 <%= f.field_container :source do %>
   <%= f.label :source, 'source' %> <span class="required">*</span><br />
-  <%= f.text_field :source, :class => 'fullwidth' %>
+  <%= f.text_field :source, :class => 'fullwidth', placeholder: '/my_custom_path\/([0-9]+)/' %>
   <%= f.error_message_on :source %>
 <% end %>
 <%= f.field_container :destination do %>
   <%= f.label :destination, 'destination' %> <span class="required">*</span><br />
-  <%= f.text_field :destination, :class => 'fullwidth' %>
+  <%= f.text_field :destination, :class => 'fullwidth', placeholder: '/my_destination/$1' %>
   <%= f.error_message_on :destination %>
 <% end %>
+<div class="field">
+  <%= f.check_box :active %>
+  <%= f.label :active, 'active' %>
+</div>

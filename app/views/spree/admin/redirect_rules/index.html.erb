@@ -1,37 +1,48 @@
-<%= render :partial => 'spree/admin/shared/configuration_menu' %>
-
-<% content_for :page_title do %>
-  Listing redirect rules
-<% end %>
-
+<% admin_layout "full-width" %>
+<% admin_breadcrumb(t('spree.redirect_rules')) %>
 <% content_for :page_actions do %>
   <li>
-    <%= button_link_to 'New redirect rule', new_object_url, { :icon => 'icon-plus' } %>
+    <%= link_to t('spree.new_redirect_rule'), new_object_url, class: 'btn btn-primary' %>
   </li>
-<% end %>
+<% end if can?(:create, RedirectRule) %>
 
-<table class="index">
-  <thead>
-    <tr>
-      <th>Active</th>
-      <th>Source</th>
-      <th>Destination</th>
-      <th class="actions"></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @redirect_rules.each do |redirect_rule| %>
+<% if @redirect_rules.any? %>
+  <table class="index">
+    <thead>
       <tr>
-        <td><%= redirect_rule.active %></td>
-        <td><%= redirect_rule.source %></td>
-        <td><%= redirect_rule.destination %></td>
-        <td class="actions">
-          <%= link_to '', edit_admin_redirect_rule_path(redirect_rule), class: 'edit icon_link with-tip icon-edit no-text' %>
-          &nbsp;
-          <%= link_to '', admin_redirect_rule_path(redirect_rule), method: :delete, data: { confirm: 'Are you sure?' }, class: 'delete-resource icon_link with-tip icon-trash no-text' %>
-        </td>
+        <th>Active</th>
+        <th>Source</th>
+        <th>Destination</th>
+        <th data-hook="admin_redirect_rules_index_header_actions" class="actions"></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% @redirect_rules.each do |redirect_rule| %>
+        <tr>
+          <td><%= redirect_rule.active %></td>
+          <td><%= redirect_rule.source %></td>
+          <td><%= redirect_rule.destination %></td>
 
+          <td class="actions">
+            <%= link_to '', edit_admin_redirect_rule_path(redirect_rule), class: 'edit icon_link with-tip icon-edit no-text' %>
+            &nbsp;
+            <%= link_to '', admin_redirect_rule_path(redirect_rule), method: :delete, data: { confirm: 'Are you sure?' }, class: 'delete-resource icon_link with-tip icon-trash no-text' %>
+          </td>
+
+          <td class="actions" data-hook="admin_redirect_rules_index_row_actions">
+            <%= link_to_edit redirect_rule, no_text: true, class: 'edit' if can?(:edit, redirect_rule)  %>
+            &nbsp;
+            <%= link_to_delete redirect_rule, no_text: true if can?(:destroy, redirect_rule) %>
+          </td>
+
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <div class="no-objects-found">
+    <%= render 'spree/admin/shared/no_objects_found',
+                  resource: RedirectRule,
+                  new_resource_url: new_object_url %>
+  </div>
+<% end %>

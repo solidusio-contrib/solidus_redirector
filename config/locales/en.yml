@@ -3,3 +3,10 @@
 
 en:
   hello: "Hello world"
+  spree:
+    admin:
+      tab:
+        redirects: Redirects
+    new_redirect_rule: New Redirect Rule
+    redirect_rules: Redirect Rules
+

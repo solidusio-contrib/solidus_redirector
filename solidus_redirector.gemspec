@@ -3,36 +3,36 @@
 $:.push File.expand_path('lib', __dir__)
 require 'solidus_redirector/version'
 
-Gem::Specification.new do |s|
-  s.platform    = Gem::Platform::RUBY
-  s.name        = 'solidus_redirector'
-  s.version     = SolidusRedirector::VERSION
-  s.summary     = 'A Solidus admin interface to redirector'
-  s.description = s.summary
-  s.license     = 'BSD-3-Clause'
+Gem::Specification.new do |spec|
+  spec.platform    = Gem::Platform::RUBY
+  spec.name        = 'solidus_redirector'
+  spec.version     = SolidusRedirector::VERSION
+  spec.summary     = 'A Solidus admin interface to redirector'
+  spec.description = spec.summary
+  spec.license     = 'BSD-3-Clause'
+  spec.author    = 'John Hawthorn'
+  spec.email     = 'john@freerunningtech.com'
+  spec.homepage  = 'https://solidus.io'
 
-  s.required_ruby_version = '> 2.4'
+  spec.required_ruby_version = '>= 3.0'
 
-  s.author    = 'John Hawthorn'
-  s.email     = 'john@freerunningtech.com'
-  s.homepage  = 'https://solidus.io'
-
-  s.files = Dir.chdir(File.expand_path(__dir__)) do
+  spec.files = Dir.chdir(File.expand_path(__dir__)) do
     `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
   end
-  s.test_files = Dir['spec/**/*']
-  s.bindir = "exe"
-  s.executables = s.files.grep(%r{^exe/}) { |f| File.basename(f) }
-  s.require_paths = ["lib"]
 
-  if s.respond_to?(:metadata)
-    s.metadata["homepage_uri"] = s.homepage if s.homepage
-    s.metadata["source_code_uri"] = 'https://github.com/solidusio-contrib/solidus_redirector'
+  spec.test_files = Dir['spec/**/*']
+  spec.bindir = "exe"
+  spec.executables = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
+  spec.require_paths = ["lib"]
+
+  if spec.respond_to?(:metadata)
+    spec.metadata["homepage_uri"] = spec.homepage if spec.homepage
+    spec.metadata["source_code_uri"] = 'https://github.com/solidusio-contrib/solidus_redirector'
   end
 
-  s.add_dependency 'redirector'
-  s.add_dependency 'solidus_core', ['>= 2.0.0', '< 4']
-  s.add_dependency 'solidus_support', '~> 0.5'
+  spec.add_dependency 'redirector'
+  spec.add_dependency 'solidus_core', ['>= 2.0.0', '< 5']
+  spec.add_dependency 'solidus_support', '~> 0.8'
 
-  s.add_development_dependency 'solidus_dev_support'
+  spec.add_development_dependency 'solidus_dev_support', '~> 2.7'
 end

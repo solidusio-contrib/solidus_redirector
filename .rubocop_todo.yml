@@ -27,7 +27,7 @@ Layout/EmptyLinesAroundAccessModifier:
 # SupportedStyles: space, no_space, compact
 # SupportedStylesForEmptyBraces: space, no_space
 Layout/SpaceInsideHashLiteralBraces:
-  EnforcedStyle: 
+  EnforcedStyle: no_space
 
 # Offense count: 1
 # This cop supports safe autocorrection (--autocorrect).

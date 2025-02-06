@@ -11,6 +11,8 @@
     <thead>
       <tr>
         <th>Active</th>
+        <th>Is Regex</th>
+        <th>Is Case Senitive</th>
         <th>Source</th>
         <th>Destination</th>
         <th data-hook="admin_redirect_rules_index_header_actions" class="actions"></th>
@@ -20,6 +22,8 @@
       <% @redirect_rules.each do |redirect_rule| %>
         <tr>
           <td><%= redirect_rule.active %></td>
+          <td><%= redirect_rule.source_is_regex %></td>
+          <td><%= redirect_rule.source_is_case_sensitive %></td>
           <td><%= redirect_rule.source %></td>
           <td><%= redirect_rule.destination %></td>
 

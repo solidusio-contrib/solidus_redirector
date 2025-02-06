@@ -23,12 +23,6 @@
           <td><%= redirect_rule.source %></td>
           <td><%= redirect_rule.destination %></td>
 
-          <td class="actions">
-            <%= link_to '', edit_admin_redirect_rule_path(redirect_rule), class: 'edit icon_link with-tip icon-edit no-text' %>
-            &nbsp;
-            <%= link_to '', admin_redirect_rule_path(redirect_rule), method: :delete, data: { confirm: 'Are you sure?' }, class: 'delete-resource icon_link with-tip icon-trash no-text' %>
-          </td>
-
           <td class="actions" data-hook="admin_redirect_rules_index_row_actions">
             <%= link_to_edit redirect_rule, no_text: true, class: 'edit' if can?(:edit, redirect_rule)  %>
             &nbsp;

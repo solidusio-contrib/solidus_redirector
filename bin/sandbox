@@ -47,6 +47,14 @@ if [ ! -d "sandbox" ]; then
   exit 1
 fi
 
+# 🔥 Fix for Sprockets error: Ensure the manifest.js file exists
+mkdir -p sandbox/app/assets/config
+cat <<EOF > sandbox/app/assets/config/manifest.js
+//= link_tree ../images
+//= link_directory ../javascripts .js
+//= link_directory ../stylesheets .css
+EOF
+
 cd ./sandbox
 cat <<RUBY >> Gemfile
 gem 'solidus', github: 'solidusio/solidus', branch: '$BRANCH'

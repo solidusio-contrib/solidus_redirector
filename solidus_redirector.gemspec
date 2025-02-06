@@ -10,9 +10,9 @@ Gem::Specification.new do |spec|
   spec.summary     = 'A Solidus admin interface to redirector'
   spec.description = spec.summary
   spec.license     = 'BSD-3-Clause'
-  spec.author    = 'John Hawthorn'
-  spec.email     = 'john@freerunningtech.com'
-  spec.homepage  = 'https://solidus.io'
+  spec.author      = 'John Hawthorn'
+  spec.email       = 'john@freerunningtech.com'
+  spec.homepage    = 'https://solidus.io'
 
   spec.required_ruby_version = Gem::Requirement.new('>= 3.1', '< 4')
 
@@ -30,7 +30,6 @@ Gem::Specification.new do |spec|
     spec.metadata["source_code_uri"] = 'https://github.com/solidusio-contrib/solidus_redirector'
   end
 
-  spec.add_dependency 'coffee-rails'
   spec.add_dependency 'redirector'
   spec.add_dependency 'solidus_core', ['>= 2.0.0', '< 5']
   spec.add_dependency 'solidus_support', '~> 0.8'

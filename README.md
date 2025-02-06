@@ -61,11 +61,7 @@ data already loaded.
     bin/setup
     bin/sandbox
   ```
-
-Please note: if you run `bin/rails server` or similar commands, only the Rails server will
-start. This might cause the error `couldn't find file 'solidus_admin/tailwind.css'` when you
-try to load admin pages.
-
+  
 Testing
 -------
 

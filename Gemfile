@@ -12,18 +12,34 @@ gem 'concurrent-ruby', '< 1.3.5'
 gem 'faraday-retry', '~> 2.2.1'
 
 gem 'rubocop-rails-omakase'
-# Needed to help Bundler figure out how to resolve dependencies,
-# otherwise it takes forever to resolve them.
-# See https://github.com/bundler/bundler/issues/6677
-gem 'rails', '>0.a'
 
+# Fetch the Rails version from the environment variable or default to '~> 7.0'
+rails_version = ENV.fetch('RAILS_VERSION', '~> 7.0')
+gem 'rails', rails_version
+
+# Extract the minimum Rails version from the version requirement.
+# For example, a requirement of "~> 7.0" translates to ">= 7.0" and "< 8.0".
+rails_req = Gem::Requirement.new(rails_version)
+# Find the minimum version specified by a ">=" constraint, if any.
+min_rails_version = rails_req.requirements.find { |op, _| op == '>=' }&.last || Gem::Version.new('0')
+
+# Determine the sqlite3 version based on the minimum Rails version.
+# If the minimum Rails version is less than 7.2, use "~> 1.4"; otherwise, use "~> 2.0".
+sqlite_version =
+  if min_rails_version < Gem::Version.new('7.2')
+    "~> 1.4"
+  else
+    "~> 2.0"
+  end
+
+# Select the database adapter based on the DB environment variable.
 case ENV.fetch('DB', nil)
 when 'mysql'
   gem 'mysql2'
 when 'postgresql'
   gem 'pg'
 else
-  gem 'sqlite3', '~> 1.4'
+  gem 'sqlite3', sqlite_version
 end
 
 # While we still support Ruby < 3 we need to workaround a limitation in
